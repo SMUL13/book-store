@@ -10,7 +10,7 @@ export function renderView(route) {
       fetchView('BookAdd.html')
         .then(viewContent => {
           viewContainer.innerHTML = viewContent;
-          // Fire event that form is loaded
+          // Fire event when form is loaded
           dispatchEvent(new Event("formLoaded"))
         })
         .catch(() => viewContainer.innerHTML = '<h1>Failed to load view</h1>');
@@ -19,13 +19,22 @@ export function renderView(route) {
       fetchView('BookSearch.html')
         .then(viewContent => {
           viewContainer.innerHTML = viewContent;
-          // Fire event that search is loaded
+          // Fire event when search is loaded
           dispatchEvent(new Event("searchLoaded"))
         })
         .catch(() => viewContainer.innerHTML = '<h1>Failed to load view</h1>');
       break;
     default:
-      viewContainer.innerHTML = '<h1>Not Found</h1>';
+      const storedBooks = localStorage.getItem('books');
+      if (route.match(/^\/book\/\d+$/) && storedBooks) {
+        const bookId = route.split('/book/')[1]; // Extract the book id from the route
+        // Fire event when overview is loaded and pass the book ID as a custom property of the event
+        const event = new CustomEvent('overviewLoaded', {detail: {bookId, storedBooks}});
+        dispatchEvent(event)
+      } else {
+        viewContainer.innerHTML = '<h1>Not Found</h1>';
+      }
+      break;
       break;
   }
 }

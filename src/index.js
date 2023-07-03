@@ -1,6 +1,7 @@
 import "./styles.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import {books} from "./data/books";
 import {handleRouteChange} from './utils/router';
 
@@ -25,7 +26,15 @@ window.addEventListener('formLoaded', () => {
     const form = document.getElementById('book-form');
 
     // Event listener for form submission
-    form.addEventListener('submit', handleFormSubmit);
+    form.addEventListener('submit', (event) => handleFormSubmit(event, form));
+});
+// Event listener for loaded overview
+window.addEventListener('overviewLoaded', (event) => {
+    const {storedBooks, bookId} = event.detail;
+    const parsedBooks = JSON.parse(storedBooks);
+    const book = parsedBooks.find(b => b.isbn10 === bookId);
+    createBookOverview(book)
+
 });
 
 /* Functions */
@@ -88,13 +97,57 @@ function createBookCard(book) {
           <div class="card-body d-flex flex-column">
               <h5 class="card-title mb-5">${book.title}</h5>
               <div class="d-flex mt-auto justify-content-between align-items-center">
-                <div class="card-text">${book.author1 ? book.author1 : "Author"}</div>
+                <div class="card-text">${book.authors ? book.authors.join(", ") : "Author"}</div>
                 <div class="card-text">Pages: ${book.pages ? book.pages : "-"}</div>
               </div>
           </div>
       </div>
     `;
+
+    // Add click event listener to the book card
+    card.addEventListener('click', () => {
+        // Redirect to the book view page with the selected book isbn
+        window.location.href = `book/${book.isbn10}`;
+    });
+
     return card;
+
+}
+
+function createBookOverview(book) {
+    let container = document.createElement('div');
+    container.classList.add('container', 'mt-5');
+
+    container.innerHTML = `
+        <div class="row gx-5">
+            <div class="col-md-4">
+                <img src="/images/book.svg" class="book-image" alt="${book.title}">
+            </div>
+            <div class="col-md-8">
+                <h1 id="bookTitle">${book.title}</h1>
+                <p id="bookDescription">${book.description}</p>
+                <div class="d-flex gap mb-2">
+                    <button class="btn btn-outline-primary">Favourite</button>
+                    <button class="btn btn-outline-primary">Share</button>
+                </div>
+                <p id="bookCategories">Category: ${book.categories ? book.categories?.map(tag => `#${tag}`).join(', ') : ""}</p>
+                <p>Year: ${book.year ? book.year : ""}</p>
+                <p>Number of Pages: ${book.pages ? book.pages : ""}</p>
+                <p>Publisher: ${book.publisher ? book.publisher : ""}</p>
+                <p>ISBN-10: ${book.isbn10}</p>
+                <p>ISBN-13: ${book.isbn13 ? book.isbn13 : ""}</p>
+                <button class="btn btn-primary btn-block mt-4 buy-button  mx-auto d-flex justify-content-center">Buy</button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <i class="bi bi-pencil-fill"></i>
+                <span>${book.authors.join(", ")}</span>
+            </div>
+        </div>
+    `;
+
+    document.getElementById("view-container").appendChild(container);
 }
 
 // Function to populate publisher options with unique publishers from books
@@ -127,7 +180,7 @@ function populatePublisherOptions(books) {
 }
 
 // Function to handle form submission 
-function handleFormSubmit(event) {
+function handleFormSubmit(event, form) {
     event.preventDefault();
     const books = JSON.parse(localStorage.getItem('books'));
 
