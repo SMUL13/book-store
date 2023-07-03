@@ -40,7 +40,7 @@ window.addEventListener('overviewLoaded', (event) => {
 /* Functions */
 
 /* Function to create a new book object */
-function createBookObject(form) {
+export function createBookObject(form) {
     const book = {
         title: form.title.value,
         description: form.description.value,
@@ -60,7 +60,7 @@ function createBookObject(form) {
 }
 
 // Function to initialize books 
-function initializeBooks() {
+export function initializeBooks() {
     const storedBooks = localStorage.getItem('books');
     const parsedBooks = storedBooks ? JSON.parse(storedBooks) : books.books;
 
@@ -76,7 +76,7 @@ function initializeBooks() {
 }
 
 // Function to display books in a grid
-function displayBooks(books) {
+export function displayBooks(books) {
     const bookGrid = document.getElementById("bookGrid");
     bookGrid.innerHTML = '';
 
@@ -88,11 +88,11 @@ function displayBooks(books) {
 }
 
 // Function to create a book card
-function createBookCard(book) {
+export function createBookCard(book) {
     const card = document.createElement('div');
     card.classList.add('col');
     card.innerHTML = `
-      <div class="card h-100">
+      <div class="card h-100" role="button">
           <img src="images/book.svg" class="card-img-top p-2" alt="${book.title}">
           <div class="card-body d-flex flex-column">
               <h5 class="card-title mb-5">${book.title}</h5>
@@ -114,7 +114,7 @@ function createBookCard(book) {
 
 }
 
-function createBookOverview(book) {
+export function createBookOverview(book) {
     let container = document.createElement('div');
     container.classList.add('container', 'mt-5');
 
@@ -151,7 +151,7 @@ function createBookOverview(book) {
 }
 
 // Function to populate publisher options with unique publishers from books
-function populatePublisherOptions(books) {
+export function populatePublisherOptions(books) {
     const publisherDropdown = document.getElementById("publisherFilterDropdown");
 
     // Clear existing options
@@ -180,7 +180,7 @@ function populatePublisherOptions(books) {
 }
 
 // Function to handle form submission 
-function handleFormSubmit(event, form) {
+export function handleFormSubmit(event, form) {
     event.preventDefault();
     const books = JSON.parse(localStorage.getItem('books'));
 
@@ -193,7 +193,7 @@ function handleFormSubmit(event, form) {
 
 
 // Function to handle search input
-function handleSearchInput(event) {
+export function handleSearchInput(event) {
     const searchTerm = event.target.value;
     const books = JSON.parse(localStorage.getItem('books'));
     // Reset the filters
@@ -203,7 +203,7 @@ function handleSearchInput(event) {
 
 
 // Function to handle filter change
-function handleFilterChange() {
+export function handleFilterChange() {
     const checkboxInputs = document.querySelectorAll('.dropdown-menu input[type="checkbox"]:checked');
     const inputValues = Array.from(checkboxInputs).map(input => input.value);
     const books = JSON.parse(localStorage.getItem('books'));
