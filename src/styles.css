@@ -1,0 +1,31 @@
+/* form */
+
+.form-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.save-button {
+    width: 150px;
+}
+
+@media screen and (max-width: 600px) {
+    .save-button {
+        justify-content: center;
+    }
+}
+
+@media screen and (min-width: 601px) {
+    .save-button {
+        justify-content: space-between;
+    }
+}
+
+/* nav */
+
+.navbar-nav .nav-item.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
