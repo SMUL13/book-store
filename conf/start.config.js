@@ -7,9 +7,17 @@ module.exports = {
         app: "./src/index.js"
     },
     module: {
+        rules: [
+            // Rule for CSS files
+            {
+              test: /\.css$/,
+              use: ['style-loader', 'css-loader']
+            }
+          ]
     },
     output: {
-        publicPath: "/"
+        filename: "index.js",
+        publicPath: '/',
     },
     devServer: {
         port: 8080,
@@ -20,6 +28,10 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: "./src/index.html",
-          }),
+        }),
+        new HtmlWebpackPlugin({
+            template: './src/views/BookAdd.html',
+            filename: 'BookAdd.html',
+        }),
     ]
 };
