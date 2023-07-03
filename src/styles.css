@@ -41,3 +41,22 @@
 .filters .form-check-input{
     cursor: pointer;
 }
+
+/* book overview */
+
+.gap{
+    gap: 10px;
+}
+
+.buy-button {
+    width: 250px;
+}
+
+.book-image{
+    width: 200px;
+    height: 100%;
+}
+
+.bi.bi-pencil-fill{
+    font-size: 20px;
+}

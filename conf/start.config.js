@@ -54,6 +54,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/views/BookSearch.html',
             filename: 'BookSearch.html',
-        }),
+        })
     ]
 };
