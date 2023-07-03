@@ -10,13 +10,17 @@ export function renderView(route) {
       fetchView('BookAdd.html')
         .then(viewContent => {
           viewContainer.innerHTML = viewContent;
+          // Fire event that form is loaded
+          dispatchEvent(new Event("formLoaded"))
         })
         .catch(() => viewContainer.innerHTML = '<h1>Failed to load view</h1>');
       break;
     case '/search':
-      fetchView('contact.html')
+      fetchView('BookSearch.html')
         .then(viewContent => {
           viewContainer.innerHTML = viewContent;
+          // Fire event that search is loaded
+          dispatchEvent(new Event("searchLoaded"))
         })
         .catch(() => viewContainer.innerHTML = '<h1>Failed to load view</h1>');
       break;
@@ -60,8 +64,6 @@ export function handleRouteChange(navLinks, route) {
     activeLink.parentElement.classList.add('active');
   }
 
-  // Update the URL without page reload
-  history.pushState(null, null, currentRoute);
-
   renderView(currentRoute);
 }
+
