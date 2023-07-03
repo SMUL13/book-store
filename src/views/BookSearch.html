@@ -1,0 +1,33 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <h3 class="mb-5 text-center">Search to find your new book</h3>
+        <div class="col-md-6">
+            <div class="text-center">
+                <div class="input-group mb-3">
+                    <input id="searchInput" type="text" class="form-control rounded-pill"
+                        placeholder="Search by title...">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 filters">
+            <label for="publisherFilterDropdown" class="form-label">Filter by:</label>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Publisher
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="publisherFilterDropdown" id="publisherFilterDropdown">
+                    <!-- Populate options from the books object -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div id="bookGrid" class="row row-cols-1 row-cols-md-3 g-4">
+                <!-- Book Grid -->
+            </div>
+        </div>
+    </div>
+</div>

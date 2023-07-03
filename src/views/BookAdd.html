@@ -1,17 +1,17 @@
 <div class="container mt-5 form-container">
-    <h3 class="mb-5 text-center">Add new Book</h1>
+    <h3 class="mb-5 text-center">Add new Book</h3>
         <form id="book-form">
             <div class="row form-box">
                 <div class="col-md-6">
                     <div>
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="title" minlength="10" maxlength="120"
+                            <input type="text" class="form-control" id="title" minlength="10" maxlength="120" required
                                 pattern="[a-zA-Z0-9@&#*! ]+">
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
-                            <input type="text" class="form-control" id="description" maxlength="512" pattern="[A-Z].*">
+                            <input type="text" class="form-control" id="description" maxlength="512" pattern="[A-Z].*" required>
                         </div>
                         <div class="mb-3">
                             <label for="categories" class="form-label">Categories</label>
