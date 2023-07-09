@@ -35,7 +35,6 @@ export function renderView(route) {
         viewContainer.innerHTML = '<h1>Not Found</h1>';
       }
       break;
-      break;
   }
 }
 
@@ -61,8 +60,8 @@ export function fetchView(viewPath) {
 }
 
 // Handle route change
-export function handleRouteChange(navLinks, route) {
-  const currentRoute = route || window.location.pathname;
+export function handleRouteChange(navLinks) {
+  const currentRoute = window.location.pathname;
 
   // Remove the 'active' class from all links
   navLinks.forEach(link => link.parentElement.classList.remove('active'));

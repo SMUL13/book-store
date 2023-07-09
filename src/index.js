@@ -12,13 +12,15 @@ const navLinks = document.querySelectorAll('.navbar-nav .nav-link'); // Find all
 
 // Event listener for loaded content
 window.addEventListener('load', () => handleRouteChange(navLinks));
+
 // Event listener for loaded search
 window.addEventListener('searchLoaded', () => {
     const searchInput = document.getElementById('searchInput');
-    initializeBooks();
-
+    
     // Event listener for search change
     searchInput.addEventListener('input', handleSearchInput);
+
+    initializeBooks();
 
 });
 // Event listener for loaded form
